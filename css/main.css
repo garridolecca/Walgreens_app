@@ -291,36 +291,40 @@ input[type=range]{accent-color:var(--wblue);width:100%}
 /* ========== RESPONSIVE — PHONE (<=768px) ========== */
 @media(max-width:768px){
   /* bump base font for readability */
-  html,body{font-size:15px}
+  html,body{font-size:17px}
 
   /* header compact */
   #hdr{height:48px;padding:0 12px;gap:8px}
   #hdr .logo{width:32px;height:32px;font-size:17px}
-  #hdr .brand-name{font-size:14px}
+  #hdr .brand-name{font-size:16px}
   #hdr .brand-sub{display:none}
-  #hdr .api-badge{padding:4px 10px;font-size:12px}
+  #hdr .api-badge{padding:4px 10px;font-size:14px}
 
   /* tabs scrollable */
-  #tabs{top:48px;height:38px}
-  .tab{padding:0 12px;height:38px;font-size:12px;gap:3px}
+  #tabs{top:48px;height:40px}
+  .tab{padding:0 12px;height:40px;font-size:14px;gap:3px}
 
   /* content top offset */
-  #content{top:86px}
+  #content{top:88px}
 
   /* overview */
   #panel-overview.on{padding:16px 14px}
-  .ov-title{font-size:20px}
-  .ov-sub{font-size:13px;margin:4px 0 14px}
+  .ov-title{font-size:24px}
+  .ov-sub{font-size:15px;margin:4px 0 14px}
   .stats-row{gap:8px}
   .stat{flex:1 1 calc(50% - 8px);min-width:0;padding:10px}
-  .stat .sv{font-size:19px}
-  .stat .sl{font-size:11px}
+  .stat .sv{font-size:22px}
+  .stat .sl{font-size:13px}
   .pgrid{grid-template-columns:1fr;gap:12px}
   .pc{padding:14px}
-  .pc-ttl{font-size:16px}
-  .pc-kpi-val{font-size:22px}
-  .pc-kpi-lbl{font-size:13px}
-  .pc-explore-btn{font-size:14px;padding:11px}
+  .pc-num{font-size:36px}
+  .pc-ttl{font-size:18px}
+  .pc-desc{font-size:14px}
+  .pc-imp{font-size:15px}
+  .pc-sol{font-size:14px}
+  .pc-kpi-val{font-size:24px}
+  .pc-kpi-lbl{font-size:15px}
+  .pc-explore-btn{font-size:16px;padding:12px}
 
   /* sidebar becomes bottom drawer on map tabs */
   .pnl.on{flex-direction:column-reverse}
@@ -329,84 +333,112 @@ input[type=range]{accent-color:var(--wblue);width:100%}
 
   /* sidebar sections */
   .sp-hd{padding:12px}
-  .sp-ttl{font-size:14px}
-  .sp-desc{font-size:13px}
+  .sp-ttl{font-size:16px}
+  .sp-desc{font-size:15px}
   .sp-sec{padding:10px 12px}
-  .sp-sec-ttl{font-size:11px;margin-bottom:7px}
+  .sp-sec-ttl{font-size:13px;margin-bottom:7px}
 
   /* KPI row */
   .kpi-row{grid-template-columns:1fr 1fr;gap:7px}
-  .kpi .kl{font-size:12px}
-  .kpi .kv{font-size:19px}
-  .kpi .ks{font-size:11px}
+  .kpi .kl{font-size:14px}
+  .kpi .kv{font-size:22px}
+  .kpi .ks{font-size:13px}
 
   /* alerts */
-  .al{font-size:13px;padding:9px 10px}
-  .al-ttl{font-size:13px}
-  .al-desc{font-size:12px}
+  .al{font-size:15px;padding:9px 10px}
+  .al-ttl{font-size:15px}
+  .al-desc{font-size:14px}
 
   /* buttons larger tap targets */
-  .btn-b,.btn-o,.btn-r{padding:12px;font-size:14px}
-  .tog{padding:6px 12px;font-size:12px}
-  .wbtn{padding:9px 12px;font-size:13px}
+  .btn-b,.btn-o,.btn-r{padding:14px;font-size:16px}
+  .tog{padding:7px 13px;font-size:14px}
+  .wbtn{padding:10px 14px;font-size:15px}
 
   /* forms */
-  .inp{font-size:14px;padding:10px 12px}
-  .sel{font-size:14px;padding:9px}
-  .sl-lbl{font-size:12px}
+  .inp{font-size:16px;padding:11px 13px}
+  .sel{font-size:16px;padding:10px}
+  .sl-lbl{font-size:14px}
 
   /* legend */
-  .legend{font-size:12px}
+  .legend{font-size:14px}
 
   /* popup fullscreen on mobile */
   .pc-popup-box{width:100vw;max-width:100vw;max-height:100vh;border-radius:0;border:none}
   .pc-popup-body{padding:20px 18px 24px}
   .popup-header{gap:12px}
-  .popup-num{font-size:36px}
-  .popup-title{font-size:19px}
-  .popup-kpi{font-size:15px}
-  .popup-kpi-val{font-size:22px}
-  .popup-section-title{font-size:13px}
-  .popup-desc{font-size:14px}
-  .popup-impact{font-size:14px}
-  .geo-item{padding:12px}
-  .geo-name{font-size:14px}
-  .geo-desc{font-size:13px}
-  .data-tag{font-size:11px;padding:3px 8px}
-  .pc-map-btn{padding:14px;font-size:15px}
-  .pc-popup-close{top:10px;right:12px;font-size:30px}
+  .popup-num{font-size:40px}
+  .popup-title{font-size:22px}
+  .popup-kpi{font-size:17px}
+  .popup-kpi-val{font-size:24px}
+  .popup-section-title{font-size:15px}
+  .popup-desc{font-size:16px}
+  .popup-impact{font-size:16px}
+  .geo-item{padding:14px}
+  .geo-name{font-size:16px}
+  .geo-desc{font-size:15px}
+  .data-tag{font-size:13px;padding:4px 10px}
+  .pc-map-btn{padding:15px;font-size:17px}
+  .pc-popup-close{top:10px;right:12px;font-size:32px}
 
   /* map pill */
-  .mpill{font-size:10px;padding:4px 10px;bottom:8px}
+  .mpill{font-size:12px;padding:5px 11px;bottom:8px}
 
   /* modal */
   .modal-box{padding:22px 18px}
-  .modal-ttl{font-size:17px}
-  .modal-desc{font-size:13px}
-  .modal-inp{font-size:14px;padding:12px}
+  .modal-ttl{font-size:19px}
+  .modal-desc{font-size:15px}
+  .modal-inp{font-size:16px;padding:13px}
 
   /* feature list (lab) */
-  .feat{font-size:13px;padding:9px 10px}
-  .feat-name{font-size:13px}
-  .feat-desc{font-size:12px}
+  .feat{font-size:15px;padding:10px 12px}
+  .feat-name{font-size:15px}
+  .feat-desc{font-size:14px}
+
+  /* tables */
+  .tbl{font-size:14px}
+  .tbl th{font-size:13px;padding:6px 8px}
+  .tbl td{padding:6px 8px;font-size:14px}
+
+  /* badges */
+  .bdg{font-size:11px;padding:3px 8px}
 }
 
 /* ========== RESPONSIVE — SMALL PHONE (<=480px) ========== */
 @media(max-width:480px){
-  html,body{font-size:14px}
-  #hdr .brand-name{font-size:13px}
+  html,body{font-size:16px}
+  #hdr .brand-name{font-size:15px}
   #hdr .api-badge span{display:none}
-  .tab{padding:0 9px;font-size:11px}
+  .tab{padding:0 9px;font-size:13px}
   .stat{flex:1 1 calc(50% - 4px)}
-  .stat .sv{font-size:17px}
-  .stat .sl{font-size:10px}
+  .stat .sv{font-size:20px}
+  .stat .sl{font-size:12px}
   .sp{height:50vh;max-height:50vh}
   .ma{height:50vh}
-  .pc-kpi-val{font-size:20px}
-  .pc-ttl{font-size:15px}
-  .pc-explore-btn{font-size:13px;padding:11px}
-  .popup-title{font-size:17px}
-  .popup-desc{font-size:13px}
-  .geo-name{font-size:13px}
-  .geo-desc{font-size:12px}
+  .ov-title{font-size:22px}
+  .ov-sub{font-size:14px}
+  .pc-num{font-size:32px}
+  .pc-ttl{font-size:17px}
+  .pc-desc{font-size:13px}
+  .pc-imp{font-size:14px}
+  .pc-kpi-val{font-size:22px}
+  .pc-kpi-lbl{font-size:14px}
+  .pc-explore-btn{font-size:15px;padding:12px}
+  .sp-ttl{font-size:15px}
+  .sp-desc{font-size:14px}
+  .sp-sec-ttl{font-size:12px}
+  .popup-title{font-size:20px}
+  .popup-desc{font-size:15px}
+  .popup-section-title{font-size:14px}
+  .popup-impact{font-size:15px}
+  .geo-name{font-size:15px}
+  .geo-desc{font-size:14px}
+  .data-tag{font-size:12px}
+  .btn-b,.btn-o,.btn-r{font-size:15px;padding:13px}
+  .al{font-size:14px}
+  .al-desc{font-size:13px}
+  .kpi .kl{font-size:13px}
+  .kpi .kv{font-size:20px}
+  .feat{font-size:14px}
+  .feat-name{font-size:14px}
+  .feat-desc{font-size:13px}
 }
