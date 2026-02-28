@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Walgreens Strategic Intelligence Platform | ArcGIS 5.0</title>
+  <link rel="stylesheet" href="css/main.css">
+  <script type="module" src="https://js.arcgis.com/5.0/"></script>
+</head>
+<body>
+
+<!-- ============ API KEY MODAL ============ -->
+<div id="modal-api" class="on">
+  <div class="modal-box">
+    <div class="modal-logo">W</div>
+    <div class="modal-ttl">Walgreens Strategic Intelligence Platform</div>
+    <div class="modal-desc">
+      Powered by <b>ArcGIS Maps SDK for JavaScript 5.0</b>.<br>
+      Enter your ArcGIS API Key to enable live location services:
+      GeoEnrichment, Places API, Geocoding, Routing, and Weather.
+    </div>
+    <input class="modal-inp" id="apiKeyInput" type="text" placeholder="Paste your ArcGIS API key here...">
+    <div class="modal-btns">
+      <button class="btn-b" onclick="applyKey()">Activate Services</button>
+      <button class="btn-o" onclick="skipKey()">Use Mock Data</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<div id="hdr">
+  <div class="logo">W</div>
+  <div class="brand">
+    <div class="brand-name">Walgreens Strategic Intelligence</div>
+    <div class="brand-sub">Geospatial Data Science Platform &bull; ArcGIS 5.0</div>
+  </div>
+  <div class="spacer"></div>
+  <div class="api-badge" onclick="document.getElementById('modal-api').classList.add('on')">
+    <div class="api-dot" id="apiDot" style="background:var(--muted)"></div>
+    <span id="apiLabel">No API Key</span>
+  </div>
+</div>
+
+<!-- ============ TABS ============ -->
+<div id="tabs">
+  <div class="tab on" data-t="overview" onclick="gotoTab('overview')">&#x1F4CA; Overview</div>
+  <div class="tab" data-t="stores" onclick="gotoTab('stores')">&#x1F3EA; Store Network</div>
+  <div class="tab" data-t="pharmacy" onclick="gotoTab('pharmacy')">&#x1F48A; Pharmacy &amp; SDOH</div>
+  <div class="tab" data-t="retail" onclick="gotoTab('retail')">&#x2694; Retail &amp; Competition</div>
+  <div class="tab" data-t="health" onclick="gotoTab('health')">&#x1F3E5; Healthcare Footprint</div>
+  <div class="tab" data-t="strategy" onclick="gotoTab('strategy')">&#x1F4B0; PE Strategy</div>
+  <div class="tab" data-t="lab" onclick="gotoTab('lab')">&#x1F9EA; ArcGIS 5.0 Lab</div>
+</div>
+
+<!-- ============ CONTENT ============ -->
+<div id="content">
+
+  <!-- -------- OVERVIEW -------- -->
+  <div class="pnl on" id="panel-overview">
+    <div class="ov-title">Walgreens: 6 Critical Challenges</div>
+    <div class="ov-sub">How geospatial data science can transform the path forward for America's largest pharmacy chain.</div>
+
+    <div class="stats-row">
+      <div class="stat"><div class="sv r">1,200</div><div class="sl">Stores Closing</div></div>
+      <div class="stat"><div class="sv r">-91%</div><div class="sl">Market Value Decline</div></div>
+      <div class="stat"><div class="sv r">-5.3%</div><div class="sl">Retail Sales YoY</div></div>
+      <div class="stat"><div class="sv r">-23%</div><div class="sl">Rx Margin Drop</div></div>
+      <div class="stat"><div class="sv r">$6B+</div><div class="sl">Healthcare Write-downs</div></div>
+      <div class="stat"><div class="sv">$10B</div><div class="sl">PE Buyout Price</div></div>
+    </div>
+
+    <div class="pgrid" id="overviewGrid"></div>
+  </div>
+
+  <!-- -------- STORE NETWORK -------- -->
+  <div class="pnl" id="panel-stores">
+    <div class="sp">
+      <div class="sp-hd">
+        <div class="sp-ttl">Store Network Optimization</div>
+        <div class="sp-desc">Data-driven closure sequencing via gravity models, accessibility analysis, and Huff model customer redistribution.</div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Closure Risk Filter</div>
+        <div class="tog-row">
+          <div class="tog on" onclick="filterStores('all',this)">All Stores</div>
+          <div class="tog" onclick="filterStores('high',this)">High Risk</div>
+          <div class="tog" onclick="filterStores('mid',this)">Medium</div>
+          <div class="tog" onclick="filterStores('low',this)">Low Risk</div>
+        </div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Closure Simulation</div>
+        <button class="btn-r" onclick="simClosures()">Simulate Closures</button>
+        <button class="btn-o" style="margin-top:6px;display:none" id="restoreStoresBtn" onclick="restoreStores()">Restore All Stores</button>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Network KPIs</div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="kl">Total Stores</div><div class="kv" id="kpiTotalStores">25</div></div>
+          <div class="kpi"><div class="kl">High Risk</div><div class="kv r" id="kpiHighRisk">9</div></div>
+          <div class="kpi"><div class="kl">Coverage %</div><div class="kv">78.4%</div></div>
+          <div class="kpi"><div class="kl">Avg Revenue</div><div class="kv">$4.2M</div></div>
+        </div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Legend</div>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#22C55E"></div> High Performer</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#FACC15"></div> Mid Tier</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#F42941"></div> Low / Closure Risk</div>
+        </div>
+      </div>
+      <div class="sp-sec" id="closureReport" style="display:none">
+        <div class="sp-sec-ttl">Closure Impact Report</div>
+        <div id="closureReportContent"></div>
+      </div>
+    </div>
+    <div class="ma">
+      <div id="stores-map" style="width:100%;height:100%"></div>
+      <div class="mpill"><div class="mpill-dot"></div> ArcGIS 5.0 &bull; Gravity Model &bull; Huff Redistribution</div>
+    </div>
+  </div>
+
+  <!-- -------- PHARMACY & SDOH -------- -->
+  <div class="pnl" id="panel-pharmacy">
+    <div class="sp">
+      <div class="sp-hd">
+        <div class="sp-ttl">Pharmacy Deserts &amp; SDOH</div>
+        <div class="sp-desc">Map healthcare deserts, overlay social determinants of health, and model medication adherence to prove pharmacy value to payers.</div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Income Threshold</div>
+        <input type="range" min="20000" max="50000" value="30000" step="1000" oninput="updateDesertThreshold(this.value)">
+        <div class="sl-lbl"><span>$20k</span><span id="desertThreshVal">$30k</span><span>$50k</span></div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Map Layers</div>
+        <div class="tog-row">
+          <div class="tog on" onclick="togPharmLayer('deserts',this)">Pharmacy Deserts</div>
+          <div class="tog on" onclick="togPharmLayer('stores',this)">Walgreens Locations</div>
+        </div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">GeoEnrichment</div>
+        <button class="btn-b" onclick="doEnrich()">Enrich Selected Area</button>
+        <button class="btn-o" style="margin-top:6px" onclick="addSDOHLayer()">Add SDOH Living Atlas Layer</button>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Pharmacy Desert Zones</div>
+        <div id="desertList"></div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">SDOH Metrics</div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="kl">Desert Population</div><div class="kv r">1.5M+</div></div>
+          <div class="kpi"><div class="kl">Avg Adherence</div><div class="kv r">48%</div></div>
+          <div class="kpi"><div class="kl">Avg Income</div><div class="kv">$25.4k</div></div>
+          <div class="kpi"><div class="kl">340B Eligible</div><div class="kv g">6 zones</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="ma">
+      <div id="pharmacy-map" style="width:100%;height:100%"></div>
+      <div class="mpill"><div class="mpill-dot"></div> ArcGIS 5.0 &bull; GeoEnrichment &bull; Living Atlas &bull; SDOH</div>
+    </div>
+  </div>
+
+  <!-- -------- RETAIL & COMPETITION -------- -->
+  <div class="pnl" id="panel-retail">
+    <div class="sp">
+      <div class="sp-hd">
+        <div class="sp-ttl">Retail &amp; Competitive Intelligence</div>
+        <div class="sp-desc">Geodemographic clustering, competitive proximity analysis, and foot traffic mining to defend against Amazon, Walmart, and CVS.</div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Search Location</div>
+        <input class="inp" id="compSearch" placeholder="Enter address or city..." onkeyup="if(event.key==='Enter')searchComp()">
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Drive-Time Catchment</div>
+        <select class="sel" id="catchmentSel">
+          <option value="3">3 minutes</option>
+          <option value="5" selected>5 minutes</option>
+          <option value="10">10 minutes</option>
+          <option value="15">15 minutes</option>
+        </select>
+        <button class="btn-b" style="margin-top:6px" onclick="drawCatchment()">Generate Catchment</button>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Competitor Filter</div>
+        <div class="tog-row">
+          <div class="tog on" onclick="filterComp('CVS',this)">CVS</div>
+          <div class="tog on" onclick="filterComp('Walmart',this)">Walmart</div>
+          <div class="tog on" onclick="filterComp('Amazon',this)">Amazon</div>
+          <div class="tog on" onclick="filterComp('RiteAid',this)">Rite Aid</div>
+        </div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Analysis Results</div>
+        <div id="compOut" style="font-size:11px;color:var(--muted)">Click "Generate Catchment" to analyze competitive landscape.</div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Market KPIs</div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="kl">Avg Competitors</div><div class="kv r">3.8</div></div>
+          <div class="kpi"><div class="kl">Amazon Threat</div><div class="kv r">HIGH</div><div class="ks">3 fulfillment centers</div></div>
+          <div class="kpi"><div class="kl">CVS Proximity</div><div class="kv">0.4 mi</div><div class="ks">avg distance</div></div>
+          <div class="kpi"><div class="kl">Retail Decline</div><div class="kv r">-5.3%</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="ma">
+      <div id="retail-map" style="width:100%;height:100%"></div>
+      <div class="mpill"><div class="mpill-dot"></div> ArcGIS 5.0 &bull; Places API &bull; Route Service &bull; Catchment</div>
+    </div>
+  </div>
+
+  <!-- -------- HEALTHCARE FOOTPRINT -------- -->
+  <div class="pnl" id="panel-health">
+    <div class="sp">
+      <div class="sp-hd">
+        <div class="sp-ttl">Healthcare Footprint Analysis</div>
+        <div class="sp-desc">Evaluate VillageMD, Summit Health, and CityMD clinics for service area gaps, patient origin, and chronic disease overlap.</div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Clinic Type Filter</div>
+        <div class="tog-row">
+          <div class="tog on" onclick="filterClinics('all',this)">All Clinics</div>
+          <div class="tog" onclick="filterClinics('VillageMD',this)">VillageMD</div>
+          <div class="tog" onclick="filterClinics('Summit',this)">Summit</div>
+          <div class="tog" onclick="filterClinics('CityMD',this)">CityMD</div>
+        </div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Viability Assessment</div>
+        <div class="tog-row">
+          <div class="tog on" onclick="filterViability('all',this)">All</div>
+          <div class="tog" onclick="filterViability('profitable',this)">Profitable</div>
+          <div class="tog" onclick="filterViability('unprofitable',this)">Unprofitable</div>
+        </div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Service Area Gap Analysis</div>
+        <button class="btn-b" onclick="runGapAnalysis()">Run Gap Analysis</button>
+        <div id="gapResults" style="margin-top:8px;font-size:11px;color:var(--muted)"></div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Clinic KPIs</div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="kl">Total Clinics</div><div class="kv">10</div></div>
+          <div class="kpi"><div class="kl">Profitable</div><div class="kv g">5</div></div>
+          <div class="kpi"><div class="kl">Redundant</div><div class="kv r">5</div></div>
+          <div class="kpi"><div class="kl">Total Patients</div><div class="kv">117K</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="ma">
+      <div id="health-map" style="width:100%;height:100%"></div>
+      <div class="mpill"><div class="mpill-dot"></div> ArcGIS 5.0 &bull; Service Area Analysis &bull; Patient Flow</div>
+    </div>
+  </div>
+
+  <!-- -------- PE STRATEGY -------- -->
+  <div class="pnl" id="panel-strategy">
+    <div class="sp">
+      <div class="sp-hd">
+        <div class="sp-ttl">PE Restructuring Intelligence</div>
+        <div class="sp-desc">Micro-fulfillment network design, real estate monetization, and demographic forecasting for Sycamore Partners.</div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Fulfillment Suitability</div>
+        <div class="tog-row">
+          <div class="tog on" onclick="filterFulfill('all',this)">All Candidates</div>
+          <div class="tog" onclick="filterFulfill('high',this)">High Score</div>
+          <div class="tog" onclick="filterFulfill('mid',this)">Medium</div>
+        </div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Network Optimizer</div>
+        <button class="btn-b" onclick="optimizeNetwork()">Optimize Fulfillment Network</button>
+        <button class="btn-o" style="margin-top:6px" onclick="showDemoForecast()">Demographic Forecast (5yr)</button>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Strategy Results</div>
+        <div id="strategyOut" style="font-size:11px;color:var(--muted)">Select an analysis to view results.</div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Strategy KPIs</div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="kl">Fulfillment Candidates</div><div class="kv">8</div></div>
+          <div class="kpi"><div class="kl">Avg Score</div><div class="kv g">83.9</div></div>
+          <div class="kpi"><div class="kl">Delivery Coverage</div><div class="kv">62%</div></div>
+          <div class="kpi"><div class="kl">RE Monetizable</div><div class="kv">$1.2B</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="ma">
+      <div id="strategy-map" style="width:100%;height:100%"></div>
+      <div class="mpill"><div class="mpill-dot"></div> ArcGIS 5.0 &bull; Spatial Optimization &bull; Demographic Forecast</div>
+    </div>
+  </div>
+
+  <!-- -------- ARCGIS 5.0 LAB -------- -->
+  <div class="pnl" id="panel-lab">
+    <div class="sp">
+      <div class="sp-hd">
+        <div class="sp-ttl">ArcGIS 5.0 Technology Lab</div>
+        <div class="sp-desc">Explore the latest features of ArcGIS Maps SDK for JavaScript 5.0 — including beta capabilities — applied to Walgreens location intelligence.</div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Weather Effects (5.0)</div>
+        <div class="weather-row">
+          <button class="wbtn on" onclick="setWeather('sunny',this)">&#x2600;&#xFE0F; Sunny</button>
+          <button class="wbtn" onclick="setWeather('cloudy',this)">&#x26C5; Cloudy</button>
+          <button class="wbtn" onclick="setWeather('rainy',this)">&#x1F327;&#xFE0F; Rainy</button>
+          <button class="wbtn" onclick="setWeather('snowy',this)">&#x2744;&#xFE0F; Snowy</button>
+          <button class="wbtn" onclick="setWeather('foggy',this)">&#x1F32B;&#xFE0F; Foggy</button>
+        </div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Daylight &amp; Time</div>
+        <input type="range" id="daylightSlider" min="0" max="23" value="14" step="1" oninput="updateDaylight(this.value)">
+        <div class="sl-lbl"><span>12 AM</span><span id="daylightVal">2:00 PM</span><span>11 PM</span></div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Visual Effects (5.0)</div>
+        <div class="tog-row">
+          <div class="tog on" onclick="toggleBloom(this)">Bloom / Glow</div>
+          <div class="tog on" onclick="toggleEmissive(this)">Emissive Materials</div>
+        </div>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">Selection Manager (Beta)</div>
+        <div class="lab-info">
+          <p>Click store locations on the 3D map to select them. The <b>SelectionManager</b> syncs selection state across all layers and components.</p>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:8px">
+          <div style="text-align:center;flex:1"><div class="sel-count" id="selCount">0</div><div class="sel-label">Selected</div></div>
+          <div style="text-align:center;flex:1"><div class="sel-count" id="selTotal">10</div><div class="sel-label">Total Stores</div></div>
+        </div>
+        <button class="btn-o" style="margin-top:8px" onclick="clearSelection()">Clear Selection</button>
+      </div>
+      <div class="sp-sec">
+        <div class="sp-sec-ttl">5.0 Features Demonstrated</div>
+        <div class="feat-list" id="featList"></div>
+      </div>
+    </div>
+    <div class="ma">
+      <div id="lab-map" style="width:100%;height:100%"></div>
+      <div class="mpill"><div class="mpill-dot"></div> ArcGIS 5.0 &bull; 3D Scene &bull; Weather &bull; Glow &bull; AI Components</div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<script src="js/stores.js"></script>
+<script src="js/data.js"></script>
+<script type="module" src="js/app.js"></script>
+
+</body>
+</html>

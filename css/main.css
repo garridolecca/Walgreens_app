@@ -1,0 +1,374 @@
+/* ============================================================
+   Walgreens Strategic Intelligence Platform — Styles
+   ArcGIS Maps SDK for JavaScript 5.0
+   ============================================================ */
+
+/* ---------- brand tokens ---------- */
+:root {
+  --wblue:   #0073C6;
+  --wred:    #F42941;
+  --wwhite:  #FFFFFF;
+  --dark:    #0A1628;
+  --dark2:   #060E1A;
+  --panel:   #0F1D32;
+  --card:    #142540;
+  --border:  rgba(0,115,198,0.18);
+  --bord-h:  rgba(0,115,198,0.45);
+  --text:    #E0E8F0;
+  --muted:   #6B7F99;
+  --green:   #22C55E;
+  --orange:  #F97316;
+  --yellow:  #FACC15;
+  --purple:  #A855F7;
+  --cyan:    #06B6D4;
+}
+
+/* ---------- reset ---------- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:var(--dark);color:var(--text);
+  font:13px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  -webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+.sp{-webkit-overflow-scrolling:touch}
+#panel-overview.on{-webkit-overflow-scrolling:touch}
+.pc-popup-body{-webkit-overflow-scrolling:touch}
+a{color:var(--wblue);text-decoration:none}
+::-webkit-scrollbar{width:4px;height:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--wblue);border-radius:4px}
+
+/* ---------- header ---------- */
+#hdr{position:fixed;top:0;left:0;right:0;height:54px;background:var(--dark2);
+  display:flex;align-items:center;gap:10px;padding:0 16px;z-index:100;
+  border-bottom:2px solid var(--wblue)}
+#hdr .logo{width:36px;height:36px;border-radius:8px;background:var(--wblue);
+  display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;color:#fff;flex-shrink:0}
+#hdr .brand{display:flex;flex-direction:column}
+#hdr .brand-name{font-size:14px;font-weight:700;color:var(--wblue)}
+#hdr .brand-sub{font-size:10px;color:var(--muted);letter-spacing:.3px}
+#hdr .spacer{flex:1}
+#hdr .api-badge{display:flex;align-items:center;gap:6px;padding:5px 12px;
+  background:var(--card);border:1px solid var(--border);border-radius:20px;font-size:11px;color:var(--muted);
+  cursor:pointer;transition:.15s}
+#hdr .api-badge:hover{border-color:var(--wblue);color:var(--text)}
+#hdr .api-dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+
+/* ---------- tabs ---------- */
+#tabs{position:fixed;top:54px;left:0;right:0;height:40px;background:var(--dark2);
+  display:flex;overflow-x:auto;z-index:99;border-bottom:1px solid var(--border)}
+.tab{flex-shrink:0;padding:0 14px;height:40px;display:flex;align-items:center;gap:5px;
+  font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;
+  border-bottom:3px solid transparent;transition:.15s;white-space:nowrap;user-select:none}
+.tab:hover{color:var(--text);background:rgba(0,115,198,0.06)}
+.tab.on{color:var(--wblue);border-bottom-color:var(--wblue)}
+
+/* ---------- content ---------- */
+#content{position:fixed;top:94px;bottom:0;left:0;right:0}
+.pnl{position:absolute;inset:0;display:none}
+.pnl.on{display:flex}
+
+/* ---------- overview ---------- */
+#panel-overview.on{display:block;overflow-y:auto;padding:24px 28px}
+.ov-title{font-size:22px;font-weight:700;color:var(--wblue)}
+.ov-sub{font-size:12px;color:var(--muted);margin:4px 0 18px}
+.stats-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.stat{flex:1 1 140px;background:var(--card);border:1px solid var(--border);border-radius:6px;
+  padding:12px;min-width:130px}
+.stat .sv{font-size:20px;font-weight:700;color:var(--wblue)}
+.stat .sv.r{color:var(--wred)}
+.stat .sl{font-size:10px;color:var(--muted);margin-top:2px}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pc{background:var(--panel);border:1px solid var(--border);border-top:3px solid var(--wred);
+  border-radius:6px;padding:16px;cursor:pointer;transition:.2s}
+.pc:hover{border-color:var(--wblue);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,115,198,0.15)}
+.pc-num{font-size:32px;font-weight:800;color:rgba(0,115,198,0.18);line-height:1}
+.pc-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.pc-ttl{font-size:14px;font-weight:700;margin:6px 0}
+.pc-desc{font-size:11px;color:var(--muted);line-height:1.55;margin-bottom:8px}
+.pc-imp{font-size:12px;font-weight:600;color:var(--wred);margin-bottom:10px}
+.pc-sol{background:rgba(0,115,198,0.08);border:1px solid rgba(0,115,198,0.2);border-radius:5px;
+  padding:8px 10px;font-size:11px;color:var(--text);line-height:1.5;margin-bottom:10px}
+.pc-sol b{color:var(--wblue)}
+/* -- collapsed preview -- */
+.pc-kpi-preview{display:flex;align-items:baseline;gap:8px;margin:6px 0 10px}
+.pc-kpi-val{font-size:22px;font-weight:800;color:var(--wred)}
+.pc-kpi-lbl{font-size:11px;color:var(--muted)}
+
+/* -- explore button -- */
+.pc-explore-btn{width:100%;padding:8px;border:1px solid var(--wblue);border-radius:5px;
+  font-size:12px;font-weight:600;background:transparent;color:var(--wblue);cursor:pointer;transition:.2s}
+.pc-explore-btn:hover{background:var(--wblue);color:#fff}
+
+/* ========== PROBLEM POPUP OVERLAY ========== */
+.pc-popup{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:300;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .25s ease}
+.pc-popup.on{opacity:1;pointer-events:all}
+.pc-popup-box{width:94vw;max-width:720px;max-height:88vh;background:var(--panel);
+  border:1px solid var(--wblue);border-radius:12px;overflow:hidden;position:relative;
+  display:flex;flex-direction:column;transform:scale(0.92);transition:transform .25s ease}
+.pc-popup.on .pc-popup-box{transform:scale(1)}
+.pc-popup-close{position:absolute;top:12px;right:14px;background:none;border:none;
+  font-size:24px;color:var(--muted);cursor:pointer;z-index:2;line-height:1;transition:.15s}
+.pc-popup-close:hover{color:var(--wred)}
+.pc-popup-body{overflow-y:auto;padding:28px 32px 24px}
+
+/* -- popup header -- */
+.popup-header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.popup-num{font-size:48px;font-weight:900;color:rgba(0,115,198,0.2);line-height:1}
+.popup-title{font-size:20px;font-weight:700;color:var(--text)}
+.popup-title .bdg{margin-left:8px;vertical-align:middle}
+.popup-kpi{margin-top:4px;font-size:13px;color:var(--muted)}
+.popup-kpi-val{font-size:22px;font-weight:800;color:var(--wred);margin-right:4px}
+
+/* -- popup sections -- */
+.popup-section{margin-bottom:20px}
+.popup-section-title{font-size:11px;font-weight:700;color:var(--wblue);text-transform:uppercase;
+  letter-spacing:.6px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.popup-desc{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:8px}
+.popup-impact{font-size:13px;font-weight:600;color:var(--wred);padding:8px 12px;
+  background:rgba(244,41,65,0.06);border-left:3px solid var(--wred);border-radius:4px}
+
+/* -- geo solution list -- */
+.geo-list{display:flex;flex-direction:column;gap:10px}
+.geo-item{background:rgba(0,115,198,0.05);border:1px solid rgba(0,115,198,0.15);
+  border-left:3px solid var(--wblue);border-radius:5px;padding:12px 14px}
+.geo-name{font-size:13px;font-weight:700;color:var(--wblue);margin-bottom:4px}
+.geo-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+
+/* -- dataset tags -- */
+.data-tags{display:flex;flex-wrap:wrap;gap:5px}
+.data-tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;
+  border-radius:10px;background:rgba(0,115,198,0.1);color:var(--wblue);
+  border:1px solid rgba(0,115,198,0.2);white-space:nowrap}
+
+/* -- map button -- */
+.pc-map-btn{width:100%;padding:12px;border:none;border-radius:6px;font-size:13px;font-weight:700;
+  background:var(--wblue);color:#fff;cursor:pointer;transition:.15s;margin-top:8px}
+.pc-map-btn:hover{background:#005fa3}
+
+/* ---------- badge ---------- */
+.bdg{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;
+  letter-spacing:.3px;text-transform:uppercase}
+.bdg.r{background:rgba(244,41,65,0.15);color:var(--wred)}
+.bdg.o{background:rgba(249,115,22,0.15);color:var(--orange)}
+.bdg.y{background:rgba(250,204,21,0.15);color:var(--yellow)}
+.bdg.g{background:rgba(34,197,94,0.15);color:var(--green)}
+.bdg.b{background:rgba(0,115,198,0.15);color:var(--wblue)}
+.bdg.p{background:rgba(168,85,247,0.15);color:var(--purple)}
+
+/* ---------- sidebar + map layout ---------- */
+.sp{width:290px;flex-shrink:0;background:var(--panel);overflow-y:auto;display:flex;
+  flex-direction:column;border-right:1px solid var(--border)}
+.ma{flex:1;position:relative;min-width:0}
+.sp-hd{padding:12px;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.25)}
+.sp-ttl{font-size:13px;font-weight:700;color:var(--wblue)}
+.sp-desc{font-size:11px;color:var(--muted);line-height:1.45;margin-top:4px}
+.sp-sec{padding:10px 12px;border-bottom:1px solid var(--border)}
+.sp-sec-ttl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:8px}
+
+/* ---------- buttons ---------- */
+.btn-b{width:100%;padding:8px;border:none;border-radius:5px;font-size:12px;font-weight:700;
+  background:var(--wblue);color:#fff;cursor:pointer;transition:.15s}
+.btn-b:hover{background:#005fa3}
+.btn-o{width:100%;padding:8px;border:1px solid var(--wblue);border-radius:5px;font-size:12px;
+  font-weight:600;background:transparent;color:var(--wblue);cursor:pointer;transition:.15s}
+.btn-o:hover{background:var(--wblue);color:#fff}
+.btn-r{width:100%;padding:8px;border:1px solid var(--wred);border-radius:5px;font-size:12px;
+  font-weight:600;background:rgba(244,41,65,0.08);color:var(--wred);cursor:pointer;transition:.15s}
+.btn-r:hover{background:var(--wred);color:#fff}
+
+/* ---------- toggles ---------- */
+.tog-row{display:flex;flex-wrap:wrap;gap:5px}
+.tog{padding:4px 9px;border:1px solid var(--border);border-radius:12px;font-size:10px;
+  font-weight:600;color:var(--muted);cursor:pointer;transition:.15s;background:transparent}
+.tog:hover{border-color:var(--wblue);color:var(--text)}
+.tog.on{background:rgba(0,115,198,0.12);border-color:rgba(0,115,198,0.5);color:var(--wblue)}
+
+/* ---------- KPI cards ---------- */
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:9px 10px}
+.kpi .kl{font-size:10px;color:var(--muted)}
+.kpi .kv{font-size:20px;font-weight:700;color:var(--wblue)}
+.kpi .kv.r{color:var(--wred)}
+.kpi .kv.g{color:var(--green)}
+.kpi .ks{font-size:10px;color:var(--muted)}
+.kpi-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+
+/* ---------- alerts ---------- */
+.al{display:flex;align-items:flex-start;gap:8px;padding:7px 9px;border-radius:5px;
+  background:var(--card);border-left:4px solid var(--wblue);margin-bottom:6px;font-size:11px}
+.al.crit{border-left-color:var(--wred)}
+.al.warn{border-left-color:var(--orange)}
+.al.ok{border-left-color:var(--green)}
+.al-dot{width:6px;height:6px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.al-dot.p{animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.al-ttl{font-weight:600}
+.al-desc{color:var(--muted)}
+
+/* ---------- forms ---------- */
+.inp{width:100%;padding:7px 10px;background:var(--card);border:1px solid var(--border);
+  border-radius:5px;color:var(--text);font-size:12px;outline:none;transition:.15s}
+.inp:focus{border-color:var(--wblue)}
+.sel{width:100%;padding:7px;background:var(--card);border:1px solid var(--border);
+  border-radius:5px;color:var(--text);font-size:12px;outline:none}
+input[type=range]{accent-color:var(--wblue);width:100%}
+.sl-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:3px}
+
+/* ---------- tables ---------- */
+.tbl{width:100%;font-size:11px;border-collapse:collapse}
+.tbl th{text-align:left;font-weight:600;color:var(--muted);padding:4px 6px;border-bottom:1px solid var(--border)}
+.tbl td{padding:4px 6px}
+.tbl tr:hover td{background:rgba(0,115,198,0.04)}
+
+/* ---------- legend ---------- */
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:10px;color:var(--muted)}
+.legend-item{display:flex;align-items:center;gap:4px}
+.legend-dot{width:8px;height:8px;border-radius:50%}
+
+/* ---------- map pill ---------- */
+.mpill{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+  background:rgba(10,22,40,0.85);border:1px solid var(--border);border-radius:16px;
+  padding:4px 12px;font-size:10px;color:var(--muted);pointer-events:none;
+  display:flex;align-items:center;gap:6px;white-space:nowrap}
+.mpill-dot{width:5px;height:5px;border-radius:50%;background:var(--green)}
+
+/* ---------- feature list (lab tab) ---------- */
+.feat-list{display:flex;flex-direction:column;gap:6px}
+.feat{display:flex;align-items:flex-start;gap:8px;padding:7px 9px;border-radius:5px;
+  background:var(--card);border:1px solid var(--border);font-size:11px;transition:.15s}
+.feat:hover{border-color:var(--wblue)}
+.feat-icon{font-size:16px;flex-shrink:0;width:22px;text-align:center}
+.feat-name{font-weight:600;color:var(--text)}
+.feat-desc{color:var(--muted);font-size:10px;margin-top:2px}
+
+/* ---------- weather buttons ---------- */
+.weather-row{display:flex;flex-wrap:wrap;gap:5px}
+.wbtn{padding:6px 10px;border:1px solid var(--border);border-radius:8px;font-size:11px;
+  background:transparent;color:var(--muted);cursor:pointer;transition:.15s;display:flex;align-items:center;gap:4px}
+.wbtn:hover{border-color:var(--wblue);color:var(--text)}
+.wbtn.on{background:rgba(0,115,198,0.12);border-color:var(--wblue);color:var(--wblue)}
+
+/* ---------- API modal ---------- */
+#modal-api{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;
+  display:flex;align-items:center;justify-content:center;display:none}
+#modal-api.on{display:flex}
+.modal-box{width:92vw;max-width:440px;background:var(--panel);border:1px solid var(--wblue);
+  border-radius:10px;padding:28px 24px;text-align:center}
+.modal-logo{width:56px;height:56px;border-radius:12px;background:var(--wblue);
+  display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;
+  color:#fff;margin:0 auto 14px}
+.modal-ttl{font-size:17px;font-weight:700;color:var(--wblue)}
+.modal-desc{font-size:12px;color:var(--muted);line-height:1.55;margin:8px 0 16px}
+.modal-inp{width:100%;padding:10px;background:var(--card);border:1px solid var(--border);
+  border-radius:6px;color:var(--text);font-size:13px;font-family:monospace;outline:none;margin-bottom:12px}
+.modal-inp:focus{border-color:var(--wblue)}
+.modal-btns{display:flex;gap:8px}
+.modal-btns .btn-b,.modal-btns .btn-o{flex:1}
+
+/* ---------- 3D lab info panel ---------- */
+.lab-info{background:rgba(0,115,198,0.06);border:1px solid rgba(0,115,198,0.2);
+  border-radius:6px;padding:10px;margin-top:8px}
+.lab-info p{font-size:11px;color:var(--muted);line-height:1.5}
+.lab-info b{color:var(--wblue)}
+
+/* ---------- selection indicator ---------- */
+.sel-count{font-size:18px;font-weight:700;color:var(--wblue)}
+.sel-label{font-size:10px;color:var(--muted)}
+
+/* ========== RESPONSIVE — TABLET (<=1024px) ========== */
+@media(max-width:1024px){
+  .pgrid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .sp{width:250px}
+  #panel-overview.on{padding:18px 20px}
+  .ov-title{font-size:19px}
+  .stat{min-width:110px;padding:10px}
+  .popup-num{font-size:36px}
+  .popup-title{font-size:17px}
+  .pc-popup-box{max-width:92vw}
+}
+
+/* ========== RESPONSIVE — PHONE (<=768px) ========== */
+@media(max-width:768px){
+  /* header compact */
+  #hdr{height:46px;padding:0 10px;gap:8px}
+  #hdr .logo{width:30px;height:30px;font-size:16px}
+  #hdr .brand-name{font-size:12px}
+  #hdr .brand-sub{display:none}
+  #hdr .api-badge{padding:3px 8px;font-size:10px}
+
+  /* tabs scrollable, smaller */
+  #tabs{top:46px;height:36px}
+  .tab{padding:0 10px;height:36px;font-size:10px;gap:3px}
+
+  /* content top offset */
+  #content{top:82px}
+
+  /* overview */
+  #panel-overview.on{padding:14px 12px}
+  .ov-title{font-size:17px}
+  .ov-sub{font-size:11px;margin:2px 0 12px}
+  .stats-row{gap:6px}
+  .stat{flex:1 1 calc(50% - 6px);min-width:0;padding:8px}
+  .stat .sv{font-size:16px}
+  .stat .sl{font-size:9px}
+  .pgrid{grid-template-columns:1fr;gap:10px}
+
+  /* sidebar becomes bottom drawer on map tabs */
+  .pnl.on{flex-direction:column-reverse}
+  .sp{width:100%;height:45vh;max-height:45vh;border-right:none;border-top:1px solid var(--border);flex-shrink:0}
+  .ma{height:55vh;flex:none;width:100%}
+
+  /* sidebar sections tighter */
+  .sp-hd{padding:10px}
+  .sp-ttl{font-size:12px}
+  .sp-desc{font-size:10px}
+  .sp-sec{padding:8px 10px}
+  .sp-sec-ttl{font-size:9px;margin-bottom:6px}
+
+  /* KPI row */
+  .kpi-row{grid-template-columns:1fr 1fr;gap:6px}
+  .kpi .kv{font-size:16px}
+
+  /* buttons larger tap targets */
+  .btn-b,.btn-o,.btn-r{padding:10px;font-size:13px}
+  .tog{padding:5px 10px;font-size:10px}
+  .wbtn{padding:8px 10px;font-size:11px}
+
+  /* popup fullscreen on mobile */
+  .pc-popup-box{width:100vw;max-width:100vw;max-height:100vh;border-radius:0;border:none}
+  .pc-popup-body{padding:18px 16px 20px}
+  .popup-header{gap:10px}
+  .popup-num{font-size:32px}
+  .popup-title{font-size:16px}
+  .popup-kpi-val{font-size:18px}
+  .popup-desc{font-size:12px}
+  .geo-item{padding:10px}
+  .geo-name{font-size:12px}
+  .geo-desc{font-size:11px}
+  .data-tag{font-size:9px;padding:2px 6px}
+  .pc-map-btn{padding:14px;font-size:14px}
+  .pc-popup-close{top:8px;right:10px;font-size:28px}
+
+  /* map pill */
+  .mpill{font-size:8px;padding:3px 8px;bottom:8px}
+
+  /* modal */
+  .modal-box{padding:20px 16px}
+  .modal-ttl{font-size:15px}
+  .modal-desc{font-size:11px}
+}
+
+/* ========== RESPONSIVE — SMALL PHONE (<=480px) ========== */
+@media(max-width:480px){
+  #hdr .brand-name{font-size:11px}
+  #hdr .api-badge span{display:none}
+  .tab{padding:0 7px;font-size:9px}
+  .stat{flex:1 1 calc(50% - 4px)}
+  .stat .sv{font-size:14px}
+  .sp{height:50vh;max-height:50vh}
+  .ma{height:50vh}
+  .pc-kpi-val{font-size:18px}
+  .pc-ttl{font-size:13px}
+  .pc-explore-btn{font-size:11px;padding:10px}
+}

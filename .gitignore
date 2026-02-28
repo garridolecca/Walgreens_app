@@ -1,0 +1,6 @@
+# downloaded data files
+*.csv
+*.geojson
+*.json
+\!js/*.js
+\!package.json
