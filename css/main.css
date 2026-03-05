@@ -23,6 +23,14 @@
   --cyan:    #06B6D4;
 }
 
+/* ---------- login gate ---------- */
+#login-gate{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;
+  background:var(--dark2);background-image:radial-gradient(ellipse at 50% 40%,rgba(0,115,198,0.08),transparent 70%)}
+#login-gate .modal-inp{margin-bottom:10px}
+.btn-logout{background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:6px;
+  padding:5px 14px;font-size:11px;cursor:pointer;margin-left:10px;transition:all .2s}
+.btn-logout:hover{color:var(--wred);border-color:var(--wred)}
+
 /* ---------- reset ---------- */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden;background:var(--dark);color:var(--text);

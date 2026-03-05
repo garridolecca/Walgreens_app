@@ -3,11 +3,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.arcgis.com; style-src 'self' 'unsafe-inline' https://js.arcgis.com; img-src 'self' data: blob: https://*.arcgis.com https://*.arcgisonline.com; connect-src 'self' https://*.arcgis.com https://*.arcgisonline.com; font-src 'self' https://js.arcgis.com; worker-src blob:; frame-src 'none';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="no-referrer">
   <title>Walgreens Strategic Intelligence Platform | ArcGIS 5.0</title>
   <link rel="stylesheet" href="css/main.css">
   <script type="module" src="https://js.arcgis.com/5.0/"></script>
 </head>
 <body>
+
+<!-- ============ LOGIN GATE ============ -->
+<div id="login-gate">
+  <div class="modal-box" style="max-width:380px">
+    <div class="modal-logo">W</div>
+    <div class="modal-ttl">Secure Login</div>
+    <div class="modal-desc">Enter your credentials to access the platform.</div>
+    <div id="login-error" style="display:none;color:#F42941;font-size:12px;margin-bottom:8px;text-align:center"></div>
+    <input class="modal-inp" id="login-user" type="text" placeholder="Username" autocomplete="username">
+    <input class="modal-inp" id="login-pass" type="password" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    <div class="modal-btns">
+      <button class="btn-b" onclick="doLogin()">Sign In</button>
+    </div>
+  </div>
+</div>
+<script src="js/auth.js"></script>
+
+<!-- ============ APP CONTAINER (hidden until authenticated) ============ -->
+<div id="app-container" style="display:none">
 
 <!-- ============ API KEY MODAL ============ -->
 <div id="modal-api" class="on">
@@ -39,6 +62,7 @@
     <div class="api-dot" id="apiDot" style="background:var(--muted)"></div>
     <span id="apiLabel">No API Key</span>
   </div>
+  <button class="btn-logout" onclick="doLogout()" title="Sign out">Logout</button>
 </div>
 
 <!-- ============ TABS ============ -->
@@ -352,6 +376,8 @@
   </div>
 
 </div><!-- /content -->
+
+</div><!-- /app-container -->
 
 <script src="js/stores.js"></script>
 <script src="js/data.js"></script>
